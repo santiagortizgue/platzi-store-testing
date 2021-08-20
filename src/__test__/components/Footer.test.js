@@ -1,23 +1,21 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import { create } from 'react-test-renderer';
-import Footer from '../../components/Footer';
+import actions from '../../actions/';
+import ProductMock from '../../__mocks__/ProductMock';
 
-describe('<Footer />', () => {
-    const footer = mount( < Footer / > );
-
-    test('Render del componente Footer', () => {
-        expect(footer.length).toEqual(1);
-    });
-
-    test('Render del titulo', () => {
-        expect(footer.find(".Footer-title").text()).toEqual("Platzi Store");
-    });
-});
-
-describe('Footer Snapshot', () => {
-    test('Comprobar UI del componente footer', () => {
-        const footer = create(<Footer />);
-        expect(footer.toJSON()).toMatchSnapshot();
-    });
+describe('Actions', () => {
+  const payload = ProductMock;
+  test('addToCart Action', () => {
+    const expected = {
+      type: 'ADD_TO_CART',
+      payload,
+    };
+    expect(actions.addToCart(payload)).toEqual(expected);
+  });
+  
+  test('removeFromCart', () => {
+    const expected = {
+      type: 'REMOVE_FROM_CART',
+      payload,
+    };
+    expect(actions.removeFromCart(payload)).toEqual(expected);
+  });
 });
